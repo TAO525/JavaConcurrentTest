@@ -14,12 +14,5 @@ public class Test {
         String a = "sdfa";
         String substring = a.substring(0, 2);
         System.out.println(substring == a);
-
-        Hashtable<String, String> map = new Hashtable<String,String>();
-        map.put(null,null);
-        map.put("1",null);
-        System.out.println(map.get("1"));
-        System.out.println(map.get(null));
-
     }
 }
