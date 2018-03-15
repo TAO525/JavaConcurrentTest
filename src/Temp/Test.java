@@ -17,9 +17,6 @@ public class Test {
 
         Hashtable<String, String> map = new Hashtable<String,String>();
         map.put(null,null);
-        /**
-         * hello
-         */
         map.put("1",null);
         System.out.println(map.get("1"));
         System.out.println(map.get(null));
