@@ -24,7 +24,11 @@ public class TestThreadPool {
                 }
             }
         });
-        executorService.awaitTermination(25,TimeUnit.SECONDS);
+
+        executorService.shutdown();
+        while (!executorService.awaitTermination(6,TimeUnit.SECONDS)){
+            System.out.println(3);
+        }
         executorService.execute(new Runnable() {
             @Override
             public void run() {
