@@ -9,6 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class TestCondition {
 
     private static final Lock LOCK = new ReentrantLock();
+
     private static final Condition A = LOCK.newCondition();
     private static final Condition B = LOCK.newCondition();
     private static final Condition C = LOCK.newCondition();
@@ -17,17 +18,18 @@ public class TestCondition {
     private static class A implements Runnable{
         @Override
         public void run() {
-            LOCK.lock();
+
             try {
                 while (true) {
-                    A.await();
+                    LOCK.lock();
                     System.out.println("a");
                     B.signal();
+                    LOCK.unlock();
                 }
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }finally {
-                LOCK.unlock();
+
             }
         }
     }
@@ -35,17 +37,19 @@ public class TestCondition {
     private static class B implements Runnable{
         @Override
         public void run() {
-            LOCK.lock();
+
             try {
                 while (true) {
+                    LOCK.lock();
                     B.await();
                     System.out.println("b");
                     C.signal();
+                    LOCK.unlock();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }finally {
-                LOCK.unlock();
+
             }
         }
     }
@@ -53,17 +57,19 @@ public class TestCondition {
     private static class C implements Runnable{
         @Override
         public void run() {
-            LOCK.lock();
+
             try {
                 while (true) {
+                    LOCK.lock();
                     C.await();
                     System.out.println("c");
                     D.signal();
+                    LOCK.unlock();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }finally {
-                LOCK.unlock();
+
             }
         }
     }
@@ -71,17 +77,19 @@ public class TestCondition {
     private static class D implements Runnable{
         @Override
         public void run() {
-            LOCK.lock();
+
             try {
                 while (true) {
+                    LOCK.lock();
                     D.await();
                     System.out.println("a");
                     A.signal();
+                    LOCK.unlock();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }finally {
-                LOCK.unlock();
+
             }
         }
     }
@@ -91,8 +99,6 @@ public class TestCondition {
         new Thread(new B()).start();
         new Thread(new C()).start();
         new Thread(new D()).start();
-        LOCK.lock();
-        A.signal();
-        LOCK.unlock();
+
     }
 }
