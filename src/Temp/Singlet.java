@@ -7,8 +7,10 @@ package Temp;
 public enum Singlet {
     INSTANCE;
 
+    private int a = 0;
+
     public void test(){
-        System.out.println("hello world");
+        System.out.println("hello world"+a);
     }
 
     public static void main(String[] args) {
