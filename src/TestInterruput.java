@@ -1,8 +1,8 @@
 import java.math.BigInteger;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 中断
@@ -19,6 +19,7 @@ public class TestInterruput extends Thread{
 
     @Override
     public void run() {
+        AtomicInteger atomicInteger = new AtomicInteger();
         BigInteger p = BigInteger.ONE;
         System.out.println(Thread.currentThread().getId()+"run");
         while (!Thread.currentThread().isInterrupted()){
